@@ -1,0 +1,31 @@
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
+Resources:
+  ContainerService:
+    Type: 'Aliyun::Serverless::Service'
+    Properties:
+      Role: 'acs:ram::1986114430573743:role/AliyunFCLogExecutionRole'
+      LogConfig:
+        Project: aliyun-fc-cn-shenzhen-2960df9f-ca07-539c-9be8-b50ff9e6e820
+        Logstore: function-log
+      InternetAccess: true
+    tensorflow-serving-http:
+      Type: 'Aliyun::Serverless::Function'
+      Properties:
+        Description: 'Tensorflow serving'
+        Runtime: custom-container
+        Timeout: 60
+        CAPort: 8501
+        Handler: not-used
+        MemorySize: 1024
+        CustomContainerConfig:
+          Image: 'registry.cn-shenzhen.aliyuncs.com/fc-demo/fc-demo-tensorflow-serving:v1beta1'
+        EnvironmentVariables:
+          MODEL_NAME: half_plus_two
+      Events:
+        http-trigger: # trigger name
+          Type: HTTP # trigger type
+          Properties:
+              AuthType: ANONYMOUS
+              Methods: ['GET', 'POST', 'PUT']
+
