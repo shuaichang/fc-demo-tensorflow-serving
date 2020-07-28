@@ -19,7 +19,7 @@ Resources:
         Handler: not-used
         MemorySize: 1024
         CustomContainerConfig:
-          Image: 'registry.cn-shenzhen.aliyuncs.com/fc-demo/fc-demo-tensorflow-serving:v1beta1'
+          Image: 'registry-vpc.cn-shenzhen.aliyuncs.com/fc-demo/fc-demo-tensorflow-serving:v1beta1'
         EnvironmentVariables:
           MODEL_NAME: half_plus_two
       Events:
