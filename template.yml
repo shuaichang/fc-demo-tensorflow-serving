@@ -29,4 +29,3 @@ Resources:
               AuthType: ANONYMOUS
               Methods: ['GET', 'POST', 'PUT']
 
-
